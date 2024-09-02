@@ -1,0 +1,27 @@
+	class Solution:
+	    def encode(self, strs: List[str]) -> str:
+	        # put len of num then # then word
+	        res = ''
+	        for word in strs:
+	            res += str(len(word))+'#'+word
+	        return res
+	    def decode(self, s: str) -> List[str]:
+	        # find number, then # then count number into one word
+	        res = []
+	        i=0
+	        
+	        # use while so we can move to next char when we want
+	        while i<len(s):
+	            # second pointer to see where number ends
+	            j=i
+	            while s[j] != '#':
+	                j += 1
+	            # then take numbers i:j-1 = len of next str
+	            length = int(s[i:j])
+	            # set pointer i to start of word
+	            i = j+1
+	            # from start of word +length
+	            j= i+length
+	            res.append(s[i:j])
+	            i=j
+	        return res
