@@ -1,0 +1,15 @@
+	class Solution(object):
+	    def groupAnagrams(self, strs):
+	        """
+	        :type strs: List[str]
+	        :rtype: List[List[str]]
+	        """
+	        dict = defaultdict(list) # dict with values as a list {[]}
+	        hashm = {}
+	        # sort the str
+	        for s in strs:
+	            sortedS = ''.join(sorted(s))
+	            # dict = sortedS: [str,str]
+	            dict[sortedS].append(s)
+	        
+	        return dict.values()
