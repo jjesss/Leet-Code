@@ -1,15 +1,32 @@
-	class Solution(object):
-	    def groupAnagrams(self, strs):
-	        """
-	        :type strs: List[str]
-	        :rtype: List[List[str]]
-	        """
-	        dict = defaultdict(list) # dict with values as a list {[]}
-	        hashm = {}
-	        # sort the str
-	        for s in strs:
-	            sortedS = ''.join(sorted(s))
-	            # dict = sortedS: [str,str]
-	            dict[sortedS].append(s)
-	        
-	        return dict.values()
+# O(n*m*logn)
+class Solution(object):
+    def groupAnagrams(self, strs):
+	"""
+	:type strs: List[str]
+	:rtype: List[List[str]]
+	"""
+	dict = defaultdict(list) # dict with values as a list {[]}
+	hashm = {}
+	# sort the str
+	for s in strs:
+	    sortedS = ''.join(sorted(s))
+	    # dict = sortedS: [str,str]
+	    dict[sortedS].append(s)
+	
+	return dict.values()
+
+# Another solution
+# O(n*m*26) =O(m*n)
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+	dict = defaultdict(list)
+	for s in strs: 
+	    count= [0]* 26
+	    for c in s:
+		# calc count list of char
+		count[ord(c)-ord('a')] += 1
+	    
+	    dict[tuple(count)].append(s)
+    
+	return dict.values()
+
