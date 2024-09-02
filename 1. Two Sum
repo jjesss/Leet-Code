@@ -1,0 +1,16 @@
+	class Solution(object):
+	    def twoSum(self, nums, target):
+	        """
+	        :type nums: List[int]
+	        :type target: int
+	        :rtype: List[int]
+	        """
+	        
+	        previous = {}
+	        # index then num in enumerate
+	        for index, num in enumerate(nums):
+	            sol = target - num 
+	            if sol in previous:
+	                return [previous[sol], index]
+	            else:
+	                previous[num] = index
