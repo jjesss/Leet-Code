@@ -1,0 +1,47 @@
+	class Solution(object):
+	    def topKFrequent(self, nums, k):
+	        """
+	        :type nums: List[int]
+	        :type k: int
+	        :rtype: List[int]
+	        """
+	        counts = {}
+	        # bucket sort
+	        freq = [[] for i in range(len(nums)+1)]
+	        # get num: count hashmap
+	        for num in nums:
+	            counts[num] = 1+ counts.get(num, 0)
+	        # put hashmap into count:values bucket
+	        for n,c in counts.items(): # key, value
+	            freq[c].append(n)
+	        res = []
+	        # print(freq)
+	        # from the end of the freq till we have result = k:
+	        for i in range(len(freq)-1,0, -1):
+	            # for each number in that bucket
+	            for n in freq[i]:
+	                # append freq value to res
+	                res.append(n)
+	                if len(res)== k:
+                    return res
+
+  class Solution(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        heap = []
+        counter = {}
+        for n in nums:
+            counter[n] = 1+ counter.get(n,0)
+        
+        heap = []
+        for n,v in counter.items():
+            heapq.heappush(heap, (-v,n))
+        res = []
+        while len(res) <k:
+            # [1] as we only want the num no the val
+            res.append(heapq.heappop(heap)[1])
+        return res
