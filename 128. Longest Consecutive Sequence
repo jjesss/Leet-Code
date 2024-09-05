@@ -19,4 +19,25 @@ class Solution:
             else:
                 curr=1
         return maxSeq
+# time complexity O(nlogn) because of sorting so faster way:
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        # sorting and iterating through doesnt work if theres duplicate values eg 0,1,1,2
+                     
+        maxSeq = 0
+        # set it so no duplicates
+        setn = set(nums)
+        # instead of sorting can just check if set contains value -1
+        for n in setn:
+            if n-1 not in setn:
+                length=0
+                while n+length in setn:
+                    length+=1
+                    print(n+length, length)
+                maxSeq =max(maxSeq, length)
+        return maxSeq
+
+
+        
+
         
