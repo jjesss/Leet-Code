@@ -1,0 +1,28 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        # singles () *n
+        # all n*( first then all n*)
+        # ( n-1*() )
+        # only add open if open < n
+        # only add close if close < open
+        # valid IIF open == closed == n
+        stack = []
+        res = []
+        
+        def backtrack(openN, closeN):
+            # end condition
+            if openN == closeN == n:
+                res.append(''.join(stack))
+                return
+            if openN < n:
+                stack.append('(')
+                backtrack(openN+1,closeN)
+                stack.pop()
+            
+            if closeN < openN:
+                stack.append(')')
+                backtrack(openN, closeN+1)
+                # pop so that we can restart eg ((())) pop so can do (())(),...
+                stack.pop()
+        backtrack(0,0)
+        return res
