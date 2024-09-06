@@ -1,0 +1,28 @@
+
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        
+        # collections.deque can pop fromm both sides
+        # but can also check first for ()
+        # if read ( then push ) to stack
+        dict = {'(':')','{':'}','[':']'}
+        stack = []
+        for char in s:
+            if char in ('(','{','['):
+                stack.append(char)
+                #print(stack)
+            else:
+				#NEED TO CHECK FOR EMPTY FIRST as stack[-1]on empty will error
+                if len(stack) == 0:
+                    return False
+                elif dict.keys()[dict.values().index(char)] != stack[-1]:
+                    return False
+                stack.pop()
+        if len(stack) != 0:
+            return False
+        # print(stack)
+        return True
