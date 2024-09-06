@@ -1,0 +1,30 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        # division truncates to 0 so // floor unless negtative then *1
+        stack = []
+
+        for t in tokens:
+            # what if the stack is empty??
+            # for operators take last two from stack and apply
+            if t == '+':
+                stack.append(stack.pop()+ stack.pop())
+                #print(stack)
+            elif t== '-':
+                # since to  second popped - first:
+                a,b = stack.pop(), stack.pop()
+                stack.append(b-a)
+                #print(stack)
+            elif t == '/':
+                a,b = stack.pop(), stack.pop()
+                # this truncates to 0 fro neg and pos
+                #val = stack[-2]//stack[-1]
+                stack.append(int(b/a))
+            elif t == '*':
+                stack.append(stack.pop()*stack.pop())
+                #print(stack)
+            else:
+                # add number to stack
+                stack.append(int(t))
+                #print(stack)
+        #return stack.pop()
+        return stack[0]
