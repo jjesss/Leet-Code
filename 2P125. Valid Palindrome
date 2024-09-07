@@ -1,0 +1,13 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        # change to lower case and also remove all non-alphanumeric characters
+        string = ''.join(char for char in s if char.isalnum()).lower()
+        # then we use two pointers starting at each end and go to middle
+        l,r = 0, len(string)-1
+        while l<r:
+            if string[l]!= string[r]:
+                return False
+            l+=1
+            r-=1
+        return True
+
