@@ -1,0 +1,24 @@
+# T: O(n)
+# M:O(n)
+
+
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        # create stack of pairs with start and height
+        # go through and if the next height is less then check for any prev that are higher which cannot extend any more
+        # then left overs are a hist thats smaller than last so just calc maxarea from taking end-index * height
+        maxArea = 0
+        stack = [] # pairs: (startindex, height)
+        for currI, currH in enumerate(heights):
+            start = currI
+            while stack and stack[-1][1] > currH:
+                index, height = stack.pop()
+                # calc the max area from the one popped
+                maxArea = max(maxArea, (currI - index)* height )
+                # extend back starting index for current 
+                start = index
+            stack.append((start, currH))
+        # calc for remainding
+        for i,h in stack:
+            maxArea = max(maxArea, (len(heights)-i)*h)
+        return m
