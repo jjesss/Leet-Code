@@ -1,3 +1,24 @@
+# faster 96ms
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        # find two number that add to specific target
+        # return indicies
+        #numbers.sort() # no need as its already sorted
+        # two pointers, sum, if sum> target move right pointer left 
+        # otherwise move left pointer right
+        l,r = 0, len(numbers)-1
+        while l<r:
+            currSum = numbers[l]+numbers[r]
+            if currSum > target:
+                r-=1
+            elif currSum < target:
+                l+=1
+            else:
+                return [l+1,r+1]
+        return []
+
+
+# little slower 110ms
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         # change to lower case and also remove all non-alphanumeric characters
