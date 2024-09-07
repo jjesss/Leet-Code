@@ -1,0 +1,32 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        # sort the nums
+        # have pointers,a,b,c
+        # iterate through with a, if next number is same as a, then skip
+        # basically do two sums 2 with target as 0-a
+        # add answer to arr
+        # move pointerA until reaches 0 as anything after is positive
+        nums.sort()
+        for i,a in enumerate(nums):
+            # dont consider repeats
+            if i>0 and a == nums[i-1]:
+                continue
+            l,r = i+1,len(nums)-1
+            while l<r:
+                threesum = a+ nums[l]+nums[r]
+                if threesum < 0:
+                    l+=1
+                elif threesum >0:
+                    r-=1
+                else:
+                    res.append([a,nums[l],nums[r]])
+                    # update pointers
+                    # [-2,-2,0,0,2,2]
+                    # we just need to shift l, ignoring if same as last and l<r
+                    l+=1
+                    while nums[l] == nums[l-1] and l<r:
+                        l+=1
+            
+            
+        return res
