@@ -1,0 +1,16 @@
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        # find two number that add to specific target
+        # return indicies
+        numbers.sort()
+        # two pointers, sum, if sum> target move right pointer left 
+        # otherwise move left pointer right
+        l,r = 0, len(numbers)-1
+        total = numbers[l]+numbers[r]
+        while total != target:
+            if total > target:
+                r-=1
+            else:
+                l+=1
+            total = numbers[l]+numbers[r]
+        return l+1,r+1
