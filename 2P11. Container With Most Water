@@ -1,0 +1,17 @@
+#O(n)
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        
+        maxw = 0
+        l,r = 0, len(height)-1
+        while l<r:
+            
+            maxw = max(maxw, (r-l)*min(height[l],height[r]))
+            # move the snallest height out of the two
+            if height[l]<height[r]:
+                l+=1
+            # move r if r<l but also can move either if its the same
+            else:
+                r-=1
+        return maxw
