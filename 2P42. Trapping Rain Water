@@ -1,0 +1,32 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        # if nextsmaller add val - next to the currsum
+        # if nexttaller add val and add to total
+        
+        #O(n)
+        # calc the max left, the max right for each
+        # then do the min(max right,max left)
+        # to see if you can capture the waater: input-min(L,R)
+
+        # O(1)
+        # since we want min(maxL,maxR) 
+        l,r = 0, len(height)-1
+        leftMax=height[l]
+        rightMax=height[r]
+        res=0
+        while l<r:
+            
+            # want min of L,R since thats the am of water that can be stored
+            if leftMax<rightMax:
+                l+=1
+                leftMax = max(leftMax, height[l])
+                # will never be negative as you are updatign leftmax first
+                res += leftMax - height[l]
+            else:
+                r-=1
+                rightMax = max(rightMax, height[r])
+                res += rightMax - height[r]
+            # first and end wont have as nothing either side to trap
+            # calc if can trap
+    
+        return res
