@@ -1,0 +1,26 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # count number of rows
+        # find do BS on middle row,
+        # if bigger search, BS on lower, if less do BS on higher rows
+        lrow,rrow = 0,len(matrix)-1
+        while lrow<=rrow:
+            mrow = (rrow + lrow) //2
+            l,r = 0,len(matrix[mrow])-1
+            print(mrow)
+            while l<=r:
+                m = (l+r)//2
+                #print(m)
+                if target>matrix[mrow][m]:
+                    l= m+1
+                elif target<matrix[mrow][m]:
+                    r=m-1
+                else:
+                    return True
+            
+            # as we know m of row isnt equal to target, check if target is higher or lower than that row
+            if target > matrix[mrow][m]:
+                lrow=mrow+1
+            else: #target < matric[mrow][m]
+                rrow = mrow-1
+        return False
