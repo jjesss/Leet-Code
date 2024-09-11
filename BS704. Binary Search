@@ -1,0 +1,19 @@
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        # search target in nums
+
+        # since sorted look at middle, see if target lower or higher,
+        # search appropriate side with same strat
+        l,r = 0, len(nums)-1
+
+        while l<=r: # target can also be on either pointer
+            m = (l+r)//2
+
+            if nums[m] == target:
+                return m
+            elif target > nums[m]:
+                l = m+1
+            else:
+                r = m-1
+        return -1
